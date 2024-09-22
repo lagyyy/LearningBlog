@@ -46,10 +46,20 @@
     <mvc:resources mapping="/img/**" location="/resource/assets/img/"></mvc:resources>
     <mvc:resources mapping="/plugin/**" location="/resource/assets/plugin/"></mvc:resources>
 
+    <!--
+    在Spring MVC中，<mvc:interceptors>元素用于定义全局或特定路径的拦截器。
+    拦截器是Spring MVC中一个强大的特性，允许你在请求被处理之前或之后执行一些代码，比如日志记录、权限检查、请求预处理或后处理等。
+
+    -->
 
     <mvc:interceptors>
+        <!--
+        你给出的代码片段展示了如何在Spring MVC配置文件中定义一个全局拦截器。这个拦截器会应用到所有的请求上，因为它使用了<mvc:mapping path="/**"/>来匹配所有路径。
+        -->
         <mvc:interceptor>
+            <!-- 指定拦截器应用的路径模式，这里是所有路径 -->
             <mvc:mapping path="/**"/>
+            <!-- 指定拦截器的具体实现类 -->
             <bean class="com.imeiman.ssm.blog.interceptor.HomeResourceInterceptor"/>
         </mvc:interceptor>
 <!--        <mvc:interceptor>-->

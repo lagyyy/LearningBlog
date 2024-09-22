@@ -13,6 +13,7 @@ import com.imeiman.ssm.blog.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -73,5 +74,16 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Integer getAllByArticleCommentCountInteger() {
         return articleMapper.getAllByArticleCommentCountInteger();
+    }
+
+    @Override
+    public Integer getArticleViewCountInteger() {
+        return articleMapper.getArticleViewCountInteger();
+    }
+
+    @Override
+    public Date getArticleLastUpdateTimeDate() {
+        Date articleLastUpdateTimeDate = articleMapper.getArticleLastUpdateTimeDate();
+        return articleLastUpdateTimeDate;
     }
 }

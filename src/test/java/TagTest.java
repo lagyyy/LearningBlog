@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,9 @@ public class TagTest {
         System.out.println(articleCount);
         Integer allByArticleCommentCountInteger = mapper.getAllByArticleCommentCountInteger();
         System.out.println(allByArticleCommentCountInteger);
+
+        Date articleLastUpdateTimeDate = mapper.getArticleLastUpdateTimeDate();
+        System.out.println(articleLastUpdateTimeDate);
 //        }
     }
 

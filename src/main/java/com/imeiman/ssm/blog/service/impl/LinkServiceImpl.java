@@ -19,4 +19,10 @@ public class LinkServiceImpl implements LinkService {
         List<Link> allLink = linkMapper.getAllLink();
         return allLink;
     }
+
+    @Override
+    public Integer getLinkCount() {
+        Integer linkCount = linkMapper.getLinkCount();
+        return linkCount;
+    }
 }

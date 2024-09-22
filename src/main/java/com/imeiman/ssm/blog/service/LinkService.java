@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface LinkService {
     List<Link> getAllLink();
+
+    Integer getLinkCount();
 }

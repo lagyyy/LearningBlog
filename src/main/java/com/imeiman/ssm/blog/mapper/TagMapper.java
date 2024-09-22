@@ -20,4 +20,6 @@ public interface TagMapper {
 
 
     List<Tag> getArticleTagById(Integer id);
+
+    Integer getTagCount();
 }

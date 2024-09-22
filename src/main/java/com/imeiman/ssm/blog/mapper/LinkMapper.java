@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface LinkMapper {
     List<Link> getAllLink();
+
+    Integer getLinkCount();
 }

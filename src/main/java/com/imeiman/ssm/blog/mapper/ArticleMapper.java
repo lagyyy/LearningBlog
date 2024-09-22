@@ -4,6 +4,7 @@ import com.imeiman.ssm.blog.domain.entity.Article;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.Date;
 import java.util.List;
 
 @Mapper
@@ -15,4 +16,8 @@ public interface ArticleMapper {
     Integer getArticleCount();
 
     Integer getAllByArticleCommentCountInteger();
+
+    Integer getArticleViewCountInteger();
+
+    Date getArticleLastUpdateTimeDate();
 }

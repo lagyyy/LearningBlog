@@ -35,4 +35,12 @@ public class TagServiceImpl implements TagService {
 
         return allTags;
     }
+
+    @Override
+    public Integer getTagCount() {
+        Integer tagCount = tagMapper.getTagCount();
+        return tagCount;
+    }
+
+
 }

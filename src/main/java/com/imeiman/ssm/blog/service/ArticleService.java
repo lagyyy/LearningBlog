@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.imeiman.ssm.blog.domain.entity.Article;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,4 +21,8 @@ public interface ArticleService {
     Integer getArticleCount();
 
     Integer getAllByArticleCommentCountInteger();
+
+    Integer getArticleViewCountInteger();
+
+    Date getArticleLastUpdateTimeDate();
 }

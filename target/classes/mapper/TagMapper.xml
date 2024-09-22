@@ -27,6 +27,9 @@
         ON t.tag_id = atf.tag_id
         where atf.article_id = #{id}
     </select>
+    <select id="getTagCount" resultType="java.lang.Integer">
+       select count(*) from tag
+    </select>
 
 
 </mapper>

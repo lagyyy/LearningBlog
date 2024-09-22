@@ -24,6 +24,9 @@
     <select id="getAllLink" resultType="com.imeiman.ssm.blog.domain.entity.Link">
         select * from link
     </select>
+    <select id="getLinkCount" resultType="java.lang.Integer">
+        select count(*) from link
+    </select>
 
     <!--
     ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY article_status ASC, article_order DESC, article_id DESC这样的排序条件时，它意味着查询结果将首先按照article_status字段的值进行升序（ASC）排序，如果article_status的值相同，则进一步按照article_order字段的值进行降序（DESC）排序，如果article_order的值也相同，则最后按照article_id字段的值进行降序（DESC）排序。
