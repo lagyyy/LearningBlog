@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imeiman.ssm.blog.mapper.TagMapper" >
+    <resultMap id="BaseResultMap" type="com.imeiman.ssm.blog.domain.entity.Tag" >
+        <id column="tag_id" property="tagId" jdbcType="INTEGER" />
+        <result column="tag_name" property="tagName" jdbcType="VARCHAR" />
+        <result column="tag_description" property="tagDescription" jdbcType="VARCHAR" />
+    </resultMap>
+<!--
+<include refid="Base_Column_List"/>
+
+标签被用来引用之前定义的Base_Column_List SQL片段。
+
+
+-->
+    <sql id="Base_Column_List" >
+        tag_id, tag_name, tag_description
+    </sql>
+
+    <select id="getAllTags" resultType="com.imeiman.ssm.blog.domain.entity.Tag">
+        select * from tag;
+
+    </select>
+    <select id="getArticleTagById" resultType="com.imeiman.ssm.blog.domain.entity.Tag">
+        SELECT t.tag_id,t.tag_name
+        FROM `tag` as t INNER JOIN article_tag_ref as atf
+        ON t.tag_id = atf.tag_id
+        where atf.article_id = #{id}
+    </select>
+
+
+</mapper>

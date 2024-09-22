@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imeiman.ssm.blog.mapper.CategoryMapper" >
+    <resultMap id="BaseResultMap" type="com.imeiman.ssm.blog.domain.entity.Category" >
+        <id column="category_id" property="categoryId" jdbcType="INTEGER" />
+        <result column="category_pid" property="categoryPid" jdbcType="INTEGER" />
+        <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+        <result column="category_description" property="categoryDescription" jdbcType="VARCHAR" />
+        <result column="category_order" property="categoryOrder" jdbcType="INTEGER" />
+        <result column="category_icon" property="categoryIcon" jdbcType="INTEGER" />
+    </resultMap>
+<!--
+<include refid="Base_Column_List"/>
+
+标签被用来引用之前定义的Base_Column_List SQL片段。
+-->
+    <sql id="Base_Column_List" >
+        user_id,user_name,user_pass,user_nickname,user_email,user_url,user_avatar,
+            user_last_login_ip,user_register_time,user_last_login_time,user_status,
+            user_role
+    </sql>
+    <select id="getById" resultType="com.imeiman.ssm.blog.domain.entity.User">
+        select *
+        from user
+    </select>
+    <select id="getCategoryByArticleIdList" resultType="com.imeiman.ssm.blog.domain.entity.Category">
+        SELECT c.category_id,c.category_name,c.category_pid
+        FROM `category` as c INNER JOIN article_category_ref as acf
+              ON c.category_id = acf.category_id
+        where acf.article_id =#{id}
+
+
+
+    </select>
+    <!--
+    ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY article_status ASC, article_order DESC, article_id DESC这样的排序条件时，它意味着查询结果将首先按照article_status字段的值进行升序（ASC）排序，如果article_status的值相同，则进一步按照article_order字段的值进行降序（DESC）排序，如果article_order的值也相同，则最后按照article_id字段的值进行降序（DESC）排序。
+
+    -->
+
+
+
+
+</mapper>
