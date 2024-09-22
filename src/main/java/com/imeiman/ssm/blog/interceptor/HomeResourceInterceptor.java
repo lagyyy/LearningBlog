@@ -1,5 +1,6 @@
 package com.imeiman.ssm.blog.interceptor;
 
+import com.imeiman.ssm.blog.domain.entity.Category;
 import com.imeiman.ssm.blog.domain.entity.Options;
 import com.imeiman.ssm.blog.service.*;
 import org.checkerframework.checker.units.qual.A;
@@ -56,6 +57,9 @@ public class HomeResourceInterceptor implements HandlerInterceptor {
 
         Integer articleViewCountInteger = articleService.getArticleViewCountInteger();
         siteBasicStatistics.add(articleViewCountInteger);
+
+        List<Category> allCategoryList = categoryService.getAll();
+        httpServletRequest.setAttribute("allCategoryList",allCategoryList);
 
         httpServletRequest.setAttribute("siteBasicStatistics", siteBasicStatistics);
         Date articleLastUpdateTimeDate = articleService.getArticleLastUpdateTimeDate();

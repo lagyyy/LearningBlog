@@ -8,4 +8,6 @@ public interface CategoryMapper {
     List<Category> getCategoryByArticleIdList(Integer integer);
 
     Integer getCount();
+
+    List<Category> getAll();
 }

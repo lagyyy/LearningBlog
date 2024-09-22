@@ -20,4 +20,6 @@ public interface ArticleMapper {
     Integer getArticleViewCountInteger();
 
     Date getArticleLastUpdateTimeDate();
+
+    Article getById(Integer articleId);
 }

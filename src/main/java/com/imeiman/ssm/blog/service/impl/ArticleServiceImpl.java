@@ -86,4 +86,9 @@ public class ArticleServiceImpl implements ArticleService {
         Date articleLastUpdateTimeDate = articleMapper.getArticleLastUpdateTimeDate();
         return articleLastUpdateTimeDate;
     }
+
+    @Override
+    public Article getById(Integer articleId) {
+        return articleMapper.getById(articleId);
+    }
 }

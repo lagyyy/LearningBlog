@@ -43,6 +43,16 @@ public class IndexController {
         System.out.println(pageIndex+":::::::::"+pageSize);
         PageInfo<Article> articles = articleService.pageArticle(1, pageIndex, pageSize);
 
+        Integer articleCount = articleService.getArticleCount();
+        Integer integer =  articleCount/10;
+        System.out.println(integer);
+
+        articles.setPageNum(pageSize);
+        articles.setPages(integer+1);
+
+        System.out.println("NUm::::::::::"+articles.getPageNum());
+        System.out.println("pages::::::::::"+articles.getPages());
+
         model.addAttribute("pageInfo", articles);
 
         List<Notice> allNotice = noticeService.getAllNotice();

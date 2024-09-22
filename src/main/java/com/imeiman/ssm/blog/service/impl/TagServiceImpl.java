@@ -42,5 +42,10 @@ public class TagServiceImpl implements TagService {
         return tagCount;
     }
 
+    @Override
+    public List<Tag> getArticleTagById(Integer id) {
+        return tagMapper.getArticleTagById(id);
+    }
+
 
 }

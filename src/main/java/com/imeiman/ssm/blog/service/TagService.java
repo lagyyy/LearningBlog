@@ -8,4 +8,6 @@ public interface TagService {
     List<Tag> getAllTags();
 
     Integer getTagCount();
+
+    List<Tag> getArticleTagById(Integer id);
 }

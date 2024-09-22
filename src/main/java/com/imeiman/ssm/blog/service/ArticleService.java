@@ -25,4 +25,6 @@ public interface ArticleService {
     Integer getArticleViewCountInteger();
 
     Date getArticleLastUpdateTimeDate();
+
+    Article getById(Integer articleId);
 }
