@@ -1,9 +1,6 @@
 package com.imeiman.ssm.blog.controller.home;
 
-import com.imeiman.ssm.blog.domain.entity.Article;
-import com.imeiman.ssm.blog.domain.entity.Category;
-import com.imeiman.ssm.blog.domain.entity.Tag;
-import com.imeiman.ssm.blog.domain.entity.User;
+import com.imeiman.ssm.blog.domain.entity.*;
 import com.imeiman.ssm.blog.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +26,9 @@ public class ArticleController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     private UserService userService;
@@ -60,6 +60,10 @@ public class ArticleController {
 
         List<Article> articlesRandom = articleService.listRandomArticle(8);
         model.addAttribute("randomArticleList",articlesRandom);
+
+        List<Comment> comments = commentService.listByArticleId(article.getArticleId());
+        model.addAttribute("commentList",comments);
+
 
         return "Home/Page/articleDetail";
 

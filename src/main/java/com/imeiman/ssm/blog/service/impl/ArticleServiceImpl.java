@@ -1,10 +1,7 @@
 package com.imeiman.ssm.blog.service.impl;
 
 import com.github.pagehelper.PageInfo;
-import com.imeiman.ssm.blog.domain.entity.Article;
-import com.imeiman.ssm.blog.domain.entity.Category;
-import com.imeiman.ssm.blog.domain.entity.Tag;
-import com.imeiman.ssm.blog.domain.entity.User;
+import com.imeiman.ssm.blog.domain.entity.*;
 import com.imeiman.ssm.blog.mapper.ArticleMapper;
 import com.imeiman.ssm.blog.mapper.CategoryMapper;
 import com.imeiman.ssm.blog.mapper.TagMapper;
@@ -102,4 +99,6 @@ public class ArticleServiceImpl implements ArticleService {
         List<Article> articles = articleMapper.listRandomArticle(limit);
         return articles;
     }
+
+
 }

@@ -3,6 +3,7 @@ package com.imeiman.ssm.blog.service;
 
 import com.github.pagehelper.PageInfo;
 import com.imeiman.ssm.blog.domain.entity.Article;
+import com.imeiman.ssm.blog.domain.entity.Comment;
 import org.apache.ibatis.annotations.Param;
 
 import java.sql.Date;
@@ -31,4 +32,6 @@ public interface ArticleService {
     List<Article> listArticleByViewCount(Integer limit);
 
     List<Article> listRandomArticle(Integer limit);
+
+
 }

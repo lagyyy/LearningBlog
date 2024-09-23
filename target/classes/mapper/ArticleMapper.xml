@@ -16,7 +16,6 @@
         <result column="article_create_time" property="articleCreateTime" jdbcType="DATE" />
         <result column="article_summary" property="articleSummary" jdbcType="VARCHAR" />
         <result column="article_thumbnail" property="articleThumbnail" jdbcType="VARCHAR" />
-
     </resultMap>
 <!--
 <include refid="Base_Column_List"/>
@@ -32,7 +31,6 @@
 ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY article_status ASC, article_order DESC, article_id DESC这样的排序条件时，它意味着查询结果将首先按照article_status字段的值进行升序（ASC）排序，如果article_status的值相同，则进一步按照article_order字段的值进行降序（DESC）排序，如果article_order的值也相同，则最后按照article_id字段的值进行降序（DESC）排序。
 
 -->
-
     <select id="pageArticle" resultType="com.imeiman.ssm.blog.domain.entity.Article">
         select <include refid="Base_Column_List"></include>
         from article
@@ -57,16 +55,19 @@ ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY articl
         SELECT max(article_update_time) FROM article
     </select>
     <select id="getById" resultType="com.imeiman.ssm.blog.domain.entity.Article">
-        select * from article where article_id = #{articleId}
+        select * from article
+                 where   article_id = #{articleId} and article_status=1
     </select>
     <select id="listArticleByViewCount" resultType="com.imeiman.ssm.blog.domain.entity.Article">
-        SELECT <include refid="Base_Column_List"/> from article order by article_view_count desc limit #{limit}
+        SELECT <include refid="Base_Column_List"/>
+            from article
+            order by article_view_count desc limit #{limit}
     </select>
     <select id="listRandomArticle" resultType="com.imeiman.ssm.blog.domain.entity.Article">
         SELECT
         <include refid="Base_Column_List"/>
         FROM article
-        WHERE article_status = 1
+        where  article_status=1
         ORDER BY
         RAND()
         limit #{limit}
