@@ -83,7 +83,13 @@ ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY articl
         SELECT a.*
         from article as a INNER JOIN article_tag_ref as atr
         ON a.article_id = atr.article_id
-        where  atr.tag_id =#{tagId} and a.article_status=1
+        where  atr.tag_id = #{tagId} and a.article_status=1
+    </select>
+    <select id="getArticleByCategoryIdList" resultType="com.imeiman.ssm.blog.domain.entity.Article">
+        SELECT a.*
+        from article as a inner JOIN article_category_ref as acr
+                                     ON a.article_id = acr.article_id
+        where  acr.category_id =#{categoryId}
     </select>
 
 

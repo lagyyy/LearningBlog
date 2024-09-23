@@ -112,5 +112,11 @@ public class ArticleServiceImpl implements ArticleService {
         return articleByTagIdList;
     }
 
+    @Override
+    public List<Article> getArticleByCategoryIdList(Integer categoryId) {
+        List<Article> articleByCategoryIdList = articleMapper.getArticleByCategoryIdList(categoryId);
+        return articleByCategoryIdList;
+    }
+
 
 }

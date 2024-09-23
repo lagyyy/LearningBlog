@@ -85,4 +85,13 @@ public class ArticleController {
 
         return "Home/Page/articleListByTag";
     }
+
+    @RequestMapping(value = "/category/{categoryId}")
+    public String getArticleCategoryPage(Model model, @PathVariable Integer categoryId){
+        List<Article> articleByCategoryIdList = articleService.getArticleByCategoryIdList(categoryId);
+        PageInfo<Article> articlePageInfo = new PageInfo<>();
+        articlePageInfo.setList(articleByCategoryIdList);
+        model.addAttribute("pageInfo",articlePageInfo);
+        return "/Home/Page/articleListByCategory";
+    }
 }

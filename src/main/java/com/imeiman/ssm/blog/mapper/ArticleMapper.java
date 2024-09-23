@@ -31,4 +31,6 @@ public interface ArticleMapper {
     List<Article> listByArticleLikeCount(Integer limit);
 
     List<Article> getArticleByTagIdList(Integer tagId);
+
+    List<Article> getArticleByCategoryIdList(Integer categoryId);
 }
