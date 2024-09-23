@@ -44,6 +44,9 @@ public class TagTest {
 
         Date articleLastUpdateTimeDate = mapper.getArticleLastUpdateTimeDate();
         System.out.println(articleLastUpdateTimeDate);
+
+        List<Article> articles1 = mapper.listArticleByViewCount(8);
+        System.out.println(articles1.size());
 //        }
     }
 

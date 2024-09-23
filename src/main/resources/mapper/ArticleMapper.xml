@@ -59,6 +59,18 @@ ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY articl
     <select id="getById" resultType="com.imeiman.ssm.blog.domain.entity.Article">
         select * from article where article_id = #{articleId}
     </select>
+    <select id="listArticleByViewCount" resultType="com.imeiman.ssm.blog.domain.entity.Article">
+        SELECT <include refid="Base_Column_List"/> from article order by article_view_count desc limit #{limit}
+    </select>
+    <select id="listRandomArticle" resultType="com.imeiman.ssm.blog.domain.entity.Article">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM article
+        WHERE article_status = 1
+        ORDER BY
+        RAND()
+        limit #{limit}
+    </select>
 
 
 </mapper>

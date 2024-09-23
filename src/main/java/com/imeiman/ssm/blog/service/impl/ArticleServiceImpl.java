@@ -91,4 +91,15 @@ public class ArticleServiceImpl implements ArticleService {
     public Article getById(Integer articleId) {
         return articleMapper.getById(articleId);
     }
+
+    @Override
+    public List<Article> listArticleByViewCount(Integer limit) {
+        return articleMapper.listArticleByViewCount(limit);
+    }
+
+    @Override
+    public List<Article> listRandomArticle(Integer limit) {
+        List<Article> articles = articleMapper.listRandomArticle(limit);
+        return articles;
+    }
 }

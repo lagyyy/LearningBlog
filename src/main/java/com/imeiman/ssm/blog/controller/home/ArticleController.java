@@ -46,12 +46,20 @@ public class ArticleController {
         List<Tag> articleTagById = tagService.getArticleTagById(articleId);
         article.setTagList(articleTagById);
 
+        List<Article> articles = articleService.listArticleByViewCount(8);
+        model.addAttribute("mostCommentArticleList",articles);
+
+        List<Tag> allTags = tagService.getAllTags();
+        model.addAttribute("allTagList",allTags);
 
 
         List<Category> categoryByArticleIdList = categoryService.getCategoryByArticleIdList(articleId);
         article.setCategoryList(categoryByArticleIdList);
 
         model.addAttribute("article",article);
+
+        List<Article> articlesRandom = articleService.listRandomArticle(8);
+        model.addAttribute("randomArticleList",articlesRandom);
 
         return "Home/Page/articleDetail";
 

@@ -27,4 +27,8 @@ public interface ArticleService {
     Date getArticleLastUpdateTimeDate();
 
     Article getById(Integer articleId);
+
+    List<Article> listArticleByViewCount(Integer limit);
+
+    List<Article> listRandomArticle(Integer limit);
 }
