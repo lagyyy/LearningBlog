@@ -27,4 +27,8 @@ public interface ArticleMapper {
     List<Article> listArticleByViewCount(Integer limit);
 
     List<Article> listRandomArticle(Integer limit);
+
+    List<Article> listByArticleLikeCount(Integer limit);
+
+    List<Article> getArticleByTagIdList(Integer tagId);
 }

@@ -72,6 +72,19 @@ ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY articl
         RAND()
         limit #{limit}
     </select>
+    <select id="listByArticleLikeCount" resultType="com.imeiman.ssm.blog.domain.entity.Article">
+        select <include refid="Base_Column_List"></include>
+            from article
+        where  article_status=1
+        order by article_like_count desc ,article_comment_count desc ,article_view_count desc
+        limit #{limit};
+    </select>
+    <select id="getArticleByTagIdList" resultType="com.imeiman.ssm.blog.domain.entity.Article">
+        SELECT a.*
+        from article as a INNER JOIN article_tag_ref as atr
+        ON a.article_id = atr.article_id
+        where  atr.tag_id = #{tagId} and a.article_status=1
+    </select>
 
 
 </mapper>

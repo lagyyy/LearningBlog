@@ -47,6 +47,11 @@ public class TagTest {
 
         List<Article> articles1 = mapper.listArticleByViewCount(8);
         System.out.println(articles1.size());
+
+
+        List<Article> articleByTagIdList = mapper.getArticleByTagIdList(1);
+        System.out.println(articleByTagIdList.size());
+
 //        }
     }
 

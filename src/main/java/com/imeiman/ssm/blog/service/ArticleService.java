@@ -33,5 +33,7 @@ public interface ArticleService {
 
     List<Article> listRandomArticle(Integer limit);
 
+    List<Article> listByArticleLikeCount(Integer limit);
 
+    List<Article> getArticleByTagIdList(Integer tagId);
 }

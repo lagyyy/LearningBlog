@@ -100,5 +100,17 @@ public class ArticleServiceImpl implements ArticleService {
         return articles;
     }
 
+    @Override
+    public List<Article> listByArticleLikeCount(Integer limit) {
+        List<Article> articles = articleMapper.listByArticleLikeCount(limit);
+        return articles;
+    }
+
+    @Override
+    public List<Article> getArticleByTagIdList(Integer tagId) {
+        List<Article> articleByTagIdList = articleMapper.getArticleByTagIdList(tagId);
+        return articleByTagIdList;
+    }
+
 
 }
