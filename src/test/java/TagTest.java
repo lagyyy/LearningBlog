@@ -1,6 +1,9 @@
+import com.imeiman.ssm.blog.domain.dto.UserLoginDTO;
 import com.imeiman.ssm.blog.domain.entity.*;
 import com.imeiman.ssm.blog.mapper.*;
+import com.imeiman.ssm.blog.mapper.ArticleCategoryRefMapper;
 import com.imeiman.ssm.blog.service.ArticleService;
+import com.imeiman.ssm.blog.util.BeanCopyUtils;
 import com.imeiman.ssm.blog.util.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -88,5 +91,54 @@ public class TagTest {
 
     }
 
+    @Test
+    public void test06() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User admin = mapper.getUserByNameOrEmail("admin@liuyanzhao.com");
+        System.out.println(admin);
 
-}
+
+        UserLoginDTO userLoginDTO = new UserLoginDTO();
+        userLoginDTO.setUserId(1);
+        userLoginDTO.setUserLastLoginTime(new java.util.Date());
+//        Integer integer = mapper.updateUser(userLoginDTO);
+        User user = BeanCopyUtils.copyBean(userLoginDTO, User.class);
+        Integer integer = mapper.updateUser(user);
+        System.out.println(integer);
+
+    }
+
+    @Test
+    public void test07() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        ArticleCategoryRefMapper mapper = sqlSession.getMapper(ArticleCategoryRefMapper.class);
+        ArticleCategoryRef articleCategoryRef = new ArticleCategoryRef();
+        articleCategoryRef.setArticleId(111);
+        articleCategoryRef.setCategoryId(111);
+        ArticleCategoryRef articleCategoryRef1 = new ArticleCategoryRef(111, 222);
+        ArrayList<ArticleCategoryRef> articleCategoryRefs = new ArrayList<>();
+        articleCategoryRefs.add(articleCategoryRef);
+        articleCategoryRefs.add(articleCategoryRef1);
+
+        int i = mapper.insertBatch(articleCategoryRefs);
+        sqlSession.commit();
+
+        Integer integer = mapper.deleteByArticleId(111);
+        sqlSession.commit();
+
+        System.out.println(i);
+
+        System.out.println(integer);
+    }
+
+    @Test
+    public void test08() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        CategoryMapper mapper = sqlSession.getMapper(CategoryMapper.class);
+        Category byCategoryPidCategory = mapper.getByCategoryId(1);
+        System.out.println(byCategoryPidCategory);
+
+    }
+
+    }

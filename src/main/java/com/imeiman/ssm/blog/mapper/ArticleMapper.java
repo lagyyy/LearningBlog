@@ -14,6 +14,8 @@ public interface ArticleMapper {
                               @Param(value = "pageIndex") Integer pageIndex,
                               @Param(value = "pageSize")Integer pageSize);
 
+    boolean updateById(Article article);
+
     Integer getArticleCount();
 
     Integer getAllByArticleCommentCountInteger();
@@ -22,7 +24,7 @@ public interface ArticleMapper {
 
     Date getArticleLastUpdateTimeDate();
 
-    Article getById(Integer articleId);
+    Article getById(@Param("articleId") Integer articleId,Integer status);
 
     List<Article> listArticleByViewCount(Integer limit);
 
@@ -33,4 +35,8 @@ public interface ArticleMapper {
     List<Article> getArticleByTagIdList(Integer tagId);
 
     List<Article> getArticleByCategoryIdList(Integer categoryId);
+
+    List<Article> pageAllArticle(Integer pageIndex, Integer pageSize);
+
+    int insertOne(Article article);
 }

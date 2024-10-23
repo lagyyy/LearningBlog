@@ -2,10 +2,10 @@ package com.imeiman.ssm.blog.service;
 
 
 import com.github.pagehelper.PageInfo;
+import com.imeiman.ssm.blog.domain.dto.ArticleEditDTO;
 import com.imeiman.ssm.blog.domain.entity.Article;
-import com.imeiman.ssm.blog.domain.entity.Comment;
-import org.apache.ibatis.annotations.Param;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +14,6 @@ public interface ArticleService {
     PageInfo<Article> pageArticle(Integer status,
                               Integer pageIndex,
                               Integer pageSize);
-
     PageInfo<Article> pageArticle(Integer pageIndex,
                                   Integer pageSize,
                                   HashMap<String, Object> criteria);
@@ -27,7 +26,7 @@ public interface ArticleService {
 
     Date getArticleLastUpdateTimeDate();
 
-    Article getById(Integer articleId);
+    Article getById(Integer articleId,Integer status);
 
     List<Article> listArticleByViewCount(Integer limit);
 
@@ -38,4 +37,8 @@ public interface ArticleService {
     List<Article> getArticleByTagIdList(Integer tagId);
 
     List<Article> getArticleByCategoryIdList(Integer categoryId);
+
+    Integer editSave(ArticleEditDTO article);
+
+    int insertOne(ArticleEditDTO article, HttpSession session);
 }

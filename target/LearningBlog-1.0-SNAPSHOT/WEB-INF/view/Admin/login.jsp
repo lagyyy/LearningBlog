@@ -62,18 +62,18 @@
 <div id="login">
     <h1><a href="/" title="欢迎您光临本站！" tabindex="-1">${options.optionSiteTitle}</a></h1>
     <%
-         String username = "";
-         String password = "";
-         //获取当前站点的所有Cookie
-         Cookie[] cookies = request.getCookies();
-         for (int i = 0; i < cookies.length; i++) {//对cookies中的数据进行遍历，找到用户名、密码的数据
-             if ("username".equals(cookies[i].getName())) {
-                    username = cookies[i].getValue();
-             } else if ("password".equals(cookies[i].getName())) {
-                 password = cookies[i].getValue();
-             }
-         }
-         %>
+        String username = "";
+        String password = "";
+        //获取当前站点的所有Cookie
+        Cookie[] cookies = request.getCookies();
+        for (int i = 0; i < cookies.length; i++) {//对cookies中的数据进行遍历，找到用户名、密码的数据
+            if ("username".equals(cookies[i].getName())) {
+                username = cookies[i].getValue();
+            } else if ("password".equals(cookies[i].getName())) {
+                password = cookies[i].getValue();
+            }
+        }
+    %>
     <form name="loginForm" id="loginForm"  method="post">
         <p>
             <label for="user_login">用户名或电子邮件地址<br />

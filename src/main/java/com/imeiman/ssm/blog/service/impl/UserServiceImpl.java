@@ -24,4 +24,21 @@ public class UserServiceImpl implements UserService {
     public User getById(Integer id) {
         return userMapper.getById(id);
     }
+
+    @Override
+    public User getUserByNameOrEmail(String username) {
+        return userMapper.getUserByNameOrEmail(username);
+    }
+
+    @Override
+    public Integer updateUser(User userByNameOrEmail) {
+        Integer integer = null;
+        try {
+             integer = userMapper.updateUser(userByNameOrEmail);
+        }catch (Exception e){
+            System.out.println(e);
+            System.out.println("c胡错了");
+        }
+        return integer;
+    }
 }

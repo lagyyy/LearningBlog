@@ -24,5 +24,6 @@
         <mapper resource="mapper/CategoryMapper.xml"/>
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/OptionsMapper.xml"/>
+        <mapper resource="mapper/ArticleCategoryRefMapper.xml"></mapper>
     </mappers>
 </configuration>

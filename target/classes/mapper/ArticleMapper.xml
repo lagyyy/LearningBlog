@@ -27,10 +27,30 @@
             article_like_count,article_is_comment,article_status,article_order,article_update_time,
             article_create_time,article_summary,article_thumbnail
     </sql>
-<!--
-ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY article_status ASC, article_order DESC, article_id DESC这样的排序条件时，它意味着查询结果将首先按照article_status字段的值进行升序（ASC）排序，如果article_status的值相同，则进一步按照article_order字段的值进行降序（DESC）排序，如果article_order的值也相同，则最后按照article_id字段的值进行降序（DESC）排序。
+    <insert id="insertOne"  parameterType="com.imeiman.ssm.blog.domain.entity.Article"  useGeneratedKeys="true" keyProperty="articleId">
+        INSERT INTO article (article_user_id,article_title, article_content,article_status,article_create_time,article_summary,article_thumbnail,article_update_time)
+        VALUES (#{articleUserId},#{articleTitle}, #{articleContent}, #{articleStatus},#{articleCreateTime},#{articleSummary},#{articleThumbnail},#{articleUpdateTime})
+    </insert>
 
--->
+
+
+    <update id="updateById" parameterType="com.imeiman.ssm.blog.domain.entity.Article">
+        UPDATE article
+        <set>
+            <if test="articleTitle != null">article_title = #{articleTitle},</if>
+            <if test="articleContent != null">article_content = #{articleContent},</if>
+            <if test="articleIsComment != null">article_is_comment = #{articleIsComment},</if>
+            <if test="articleUpdateTime != null">article_update_time = #{articleUpdateTime},</if>
+            <if test="articleThumbnail != null">article_thumbnail = #{articleThumbnail},</if>
+            <if test="articleSummary != null">article_summary = #{articleSummary},</if>
+            <if test="articleStatus != null">article_status = #{articleStatus},</if>
+            <if test="articleOrder != null">article_order = #{articleOrder},</if>
+        </set>
+        WHERE article_id = #{articleId}
+    </update>
+    <!--
+    ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY article_status ASC, article_order DESC, article_id DESC这样的排序条件时，它意味着查询结果将首先按照article_status字段的值进行升序（ASC）排序，如果article_status的值相同，则进一步按照article_order字段的值进行降序（DESC）排序，如果article_order的值也相同，则最后按照article_id字段的值进行降序（DESC）排序。
+    -->
     <select id="pageArticle" resultType="com.imeiman.ssm.blog.domain.entity.Article">
         select <include refid="Base_Column_List"></include>
         from article
@@ -42,12 +62,15 @@ ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY articl
         order by article_status asc,article_order desc,article_id desc
         limit #{pageIndex},#{pageSize}
     </select>
+
     <select id="getArticleCount" resultType="java.lang.Integer">
         SELECT COUNT(*) AS total_rows FROM article;
     </select>
+
     <select id="getAllByArticleCommentCountInteger" resultType="java.lang.Integer">
         SELECT sum(article_comment_count) AS total_rows FROM article;
     </select>
+
     <select id="getArticleViewCountInteger" resultType="java.lang.Integer">
         select sum(article_view_count) from article
     </select>
@@ -56,7 +79,7 @@ ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY articl
     </select>
     <select id="getById" resultType="com.imeiman.ssm.blog.domain.entity.Article">
         select * from article
-                 where   article_id = #{articleId} and article_status=1
+        where article_id = #{articleId}
     </select>
     <select id="listArticleByViewCount" resultType="com.imeiman.ssm.blog.domain.entity.Article">
         SELECT <include refid="Base_Column_List"/>
@@ -90,6 +113,14 @@ ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY articl
         from article as a inner JOIN article_category_ref as acr
                                      ON a.article_id = acr.article_id
         where  acr.category_id =#{categoryId}
+    </select>
+
+
+    <select id="pageAllArticle" resultType="com.imeiman.ssm.blog.domain.entity.Article">
+        select <include refid="Base_Column_List"></include>
+        from article
+        order by article_status asc,article_order desc,article_id desc
+        limit #{pageIndex},#{pageSize}
     </select>
 
 

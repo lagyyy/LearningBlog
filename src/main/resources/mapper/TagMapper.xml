@@ -16,11 +16,38 @@
     <sql id="Base_Column_List" >
         tag_id, tag_name, tag_description
     </sql>
+    <insert id="insert">
+        insert into tag (tag_name,tag_description)  values(#{tagName},#{tagDescription})
+    </insert>
+    <update id="update">
+        update tag
+        <set>
+            <if test="tagName !=null and tagName != ''">
+                tag_name = #{tagName},
+            </if>
+            <if test="tagDescription !=null and tagDescription != ''">
+                tag_description = #{tagDescription},
+            </if>
+        </set>
+        where tag_id = #{tagId}
+    </update>
+    <delete id="deleteById">
+        delete from tag where tag_id = #{id}
+    </delete>
 
-    <select id="getAllTags" resultType="com.imeiman.ssm.blog.domain.entity.Tag">
-        select * from tag;
-
+    <select id="getAllTagsAndArticleCount" resultType="com.imeiman.ssm.blog.domain.vo.TagVo">
+        SELECT  t.tag_id,
+                t.tag_name,
+                COUNT(a.article_id) AS articleCount  -- 假设article_tag_ref表中有一个article_id字段来标识文章
+        FROM
+            tag AS t
+                LEFT JOIN
+            article_tag_ref AS a ON t.tag_id = a.tag_id  -- 确保使用了正确的JOIN条件
+        GROUP BY
+            t.tag_id, t.tag_name -- 通常，GROUP BY应该包含所有SELECT列表中非聚合的列
+        ORDER BY articleCount DESC;
     </select>
+
     <select id="getArticleTagById" resultType="com.imeiman.ssm.blog.domain.entity.Tag">
         SELECT t.tag_id,t.tag_name
         FROM `tag` as t INNER JOIN article_tag_ref as atf
@@ -29,6 +56,13 @@
     </select>
     <select id="getTagCount" resultType="java.lang.Integer">
        select count(*) from tag
+    </select>
+    <select id="getAllTags" resultType="com.imeiman.ssm.blog.domain.entity.Tag">
+        select *
+        from tag
+    </select>
+    <select id="getById" resultType="com.imeiman.ssm.blog.domain.entity.Tag">
+        select * from tag where tag_id = #{tagId}
     </select>
 
 

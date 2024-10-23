@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imeiman.ssm.blog.mapper.ArticleCategoryRefMapper" >
+    <resultMap id="BaseResultMap" type="com.imeiman.ssm.blog.domain.entity.ArticleCategoryRef" >
+        <id column="article_id" property="articleId" jdbcType="INTEGER" />
+        <result column="category_id" property="categoryId" jdbcType="VARCHAR" />
+    </resultMap>
+    <!--
+    <include refid="Base_Column_List"/>
+
+    标签被用来引用之前定义的Base_Column_List SQL片段。
+    -->
+    <sql id="Base_Column_List" >
+        article_id,category_id
+    </sql>
+    <sql id="tb">article_category_ref</sql>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO <include refid="tb"></include>
+        VALUES
+        <foreach collection="list" item="category" index="index" separator=",">
+            (#{category.articleId}, #{category.categoryId})
+        </foreach>
+
+    </insert>
+
+    <delete id="deleteByIds" parameterType="list">
+        DELETE FROM article_category_ref
+        WHERE article_id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{articleId}
+        </foreach>
+    </delete>
+
+
+
+    <delete id="deleteByArticleId" parameterType="java.lang.Integer" >
+        delete from <include refid="tb"></include>
+         where article_id = #{articleId}
+    </delete>
+
+
+    <!--
+    ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY article_status ASC, article_order DESC,
+     article_id DESC这样的排序条件时，它意味着查询结果将首先按照article_status字段的值进行升序（ASC）排序，如果article_status的值相同，
+    则进一步按照article_order字段的值进行降序（DESC）排序，如果article_order的值也相同，则最后按照article_id字段的值进行降序（DESC）排序。
+    -->
+
+
+
+
+</mapper>

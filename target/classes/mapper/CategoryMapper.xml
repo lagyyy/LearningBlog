@@ -15,14 +15,44 @@
 标签被用来引用之前定义的Base_Column_List SQL片段。
 -->
     <sql id="Base_Column_List" >
-        user_id,user_name,user_pass,user_nickname,user_email,user_url,user_avatar,
-            user_last_login_ip,user_register_time,user_last_login_time,user_status,
-            user_role
+        category_id,category_pid,category_name,category_description,category_order,category_icon
     </sql>
-    <select id="getById" resultType="com.imeiman.ssm.blog.domain.entity.User">
-        select *
-        from user
-    </select>
+    <sql id="tb">category</sql>
+    <insert id="insertOne">
+        insert into <include refid="tb"></include> (category_pid,category_name,category_description,category_icon)
+        values(#{categoryPid},#{categoryName},#{categoryDescription},#{categoryIcon})
+    </insert>
+    <update id="update">
+        update <include refid="tb"></include>
+        <set>
+            <if test="categoryPid !=null and categoryPid != ''">
+                category_pid = #{categoryPid},
+            </if>
+            <if test="categoryName !=null and categoryName != ''">
+                category_name = #{categoryName},
+            </if>
+            <if test="categoryDescription !=null and categoryDescription != ''">
+                category_description = #{categoryDescription},
+            </if>
+            <if test="categoryIcon !=null and categoryIcon != ''">
+                category_icon = #{categoryIcon},
+            </if>
+        </set>
+        where category_id = #{categoryId}
+    </update>
+
+
+
+    <delete id="deleteById">
+        delete  from <include refid="tb"></include>
+        where category_id = #{categoryId}
+    </delete>
+    <!--根据传入的ID列表删除数据-->
+
+
+
+
+
     <select id="getCategoryByArticleIdList" resultType="com.imeiman.ssm.blog.domain.entity.Category">
         SELECT c.category_id,c.category_name,c.category_pid
         FROM `category` as c INNER JOIN article_category_ref as acf
@@ -38,9 +68,31 @@
     <select id="getAll" resultType="com.imeiman.ssm.blog.domain.entity.Category">
         select * from category
     </select>
-    <!--
-    ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY article_status ASC, article_order DESC, article_id DESC这样的排序条件时，它意味着查询结果将首先按照article_status字段的值进行升序（ASC）排序，如果article_status的值相同，则进一步按照article_order字段的值进行降序（DESC）排序，如果article_order的值也相同，则最后按照article_id字段的值进行降序（DESC）排序。
+    <select id="getByCategoryId" resultType="com.imeiman.ssm.blog.domain.entity.Category">
+        select <include refid="Base_Column_List"></include>
+        from <include refid="tb"></include>
+        where category_pid = #{categoryPid}
 
+    </select>
+    <select id="getAllAndArticleCounts" resultType="com.imeiman.ssm.blog.domain.vo.CategoryAndArticleCount">
+        SELECT t.category_id,t.category_pid,t.category_name,
+
+               COUNT(a.article_id) AS article_count  -- 假设article_tag_ref表中有一个article_id字段来标识文章
+        FROM
+            category AS t
+                LEFT JOIN
+            article_category_ref AS a ON t.category_id = a.category_id  -- 确保使用了正确的JOIN条件
+        GROUP BY t.category_id,t.category_pid,t.category_name
+    </select>
+    <select id="getById" resultType="com.imeiman.ssm.blog.domain.entity.Category">
+        select <include refid="Base_Column_List"></include>
+            from <include refid="tb"></include>
+                where category_id = #{categoryId}
+    </select>
+    <!--
+    ORDER BY子句用于指定结果集的排序方式。当你看到ORDER BY article_status ASC, article_order DESC, article_id DESC这样的排序条件时，
+    它意味着查询结果将首先按照article_status字段的值进行升序（ASC）排序，如果article_status的值相同，
+    则进一步按照article_order字段的值进行降序（DESC）排序，如果article_order的值也相同，则最后按照article_id字段的值进行降序（DESC）排序。
     -->
 
 

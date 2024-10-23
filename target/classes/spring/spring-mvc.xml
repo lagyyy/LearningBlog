@@ -62,23 +62,23 @@
             <!-- 指定拦截器的具体实现类 -->
             <bean class="com.imeiman.ssm.blog.interceptor.HomeResourceInterceptor"/>
         </mvc:interceptor>
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/admin"/>-->
-<!--            <bean class="com.imeiman.ssm.blog.interceptor.LoginInterceptor"/>-->
-<!--        </mvc:interceptor>-->
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/admin/**"/>-->
-<!--            <bean class="com.imeiman.ssm.blog.interceptor.LoginInterceptor"/>-->
-<!--        </mvc:interceptor>-->
+        <mvc:interceptor>
+            <mvc:mapping path="/admin"/>
+            <bean class="com.imeiman.ssm.blog.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <bean class="com.imeiman.ssm.blog.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
 
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/admin/page"/>-->
-<!--            <bean class="com.imeiman.ssm.blog.interceptor.AdminInterceptor"/>-->
-<!--        </mvc:interceptor>-->
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/admin/page/**"/>-->
-<!--            <bean class="com.imeiman.ssm.blog.interceptor.AdminInterceptor"/>-->
-<!--        </mvc:interceptor>-->
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/page"/>
+            <bean class="com.imeiman.ssm.blog.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/page/**"/>
+            <bean class="com.imeiman.ssm.blog.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
 
 <!--        <mvc:interceptor>-->
 <!--            <mvc:mapping path="/admin/tag"/>-->
