@@ -55,6 +55,7 @@ public class CategoryController {
     @RequestMapping(value = "insertSubmit",method = RequestMethod.POST)
     public String insertOne(Category category,Model model){
         try {
+
             int i = categoryMapper.insertOne(category);
             if (i==1){
                 List<CategoryAndArticleCount> allAndArticleCounts = categoryMapper.getAllAndArticleCounts();
